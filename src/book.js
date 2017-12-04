@@ -2,30 +2,29 @@
  * Created by zhuyue on 17/7/24.
  */
 import React, { Component } from 'react';
+import SelectButton from './selectButton';
 
 class Book extends Component {
-  getInitialState: () => {
-    return {
-      checked: true
-    };
-  },
+  constructor () {
+    super()
+    this.state = {
+      title: 'book-title',
+      authors: 'book-authors',
+      url: 'http://img.sccnn.com/bimg/337/14943.jpg'
+    }
+  }
   render () {
+    const booksContent = this.props.bookName || this.state
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("http://img.sccnn.com/bimg/337/14943.jpg")' }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + booksContent.url +')' }}></div>
           <div className="book-shelf-changer">
-            <select>
-              <option value="none" disabled>Move to...</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
+            <SelectButton selectContent={this.props.selectContent}/>
           </div>
         </div>
-        <div className="book-title">book-title</div>
-        <div className="book-authors">book-authors{this.state.checked}</div>
+        <div className="book-title">{booksContent.title}</div>
+        <div className="book-authors">{booksContent.authors}</div>
       </div>
     )
   }
