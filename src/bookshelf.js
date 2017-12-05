@@ -11,24 +11,40 @@ class Bookshelf extends Component {
       isLiked: false
     }
   }
+  allowDrop (ev) {
+    ev.preventDefault();
+  }
+  drag (ev) {
+    ev.dataTransfer.setData("Text",ev.target.id);
+  }
+  drop (ev) {
+    ev.preventDefault();
+    var data=ev.dataTransfer.getData("Text");
+    ev.target.appendChild(document.getElementById(data));
+  }
   render () {
-    var items = [];
-    for (var i = 0; i < this.props.bookshelfContent.bookshelfContent.length; i++) {
-      items.push(
-        <li key={i}>
-          <Book bookName={this.props.bookshelfContent.bookshelfContent[i]} selectContent={this.props.selectContent}/>
-        </li>
-      );
+    const {bookshelfContent, ...props } = this.props
+    var items2 = [];
+    let shelf = ''
+    for (let key in bookshelfContent) {
+      shelf = key
+      bookshelfContent[key].forEach((item, index) => {
+        items2.push(
+          <li key={index} >
+            <Book booksContent={item} selectContent={this.props.selectContent} {...props}/>
+          </li>  )
+      })
     }
-    console.log(this.props, 'alsdjkfal;sejdjksd')
-    console.log(this.props.bookshelfContent.bookshelfContent, 'bookshelfContent')
+
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.bookshelfContent.bookshelfTitle}</h2>
+        <h2 className="bookshelf-title">{shelf}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {items}
+            {items2}
           </ol>
+          <div id="dragTarget" onDrop={(ev)=> {this.drop(ev)}} onDragOver={(event)=> {this.allowDrop(event)}}></div>
+          <div id="dragImg" draggable="true" onDragStart={(ev)=>{this.drag(ev)}} ></div>
         </div>
       </div>
     )

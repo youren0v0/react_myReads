@@ -14,13 +14,13 @@ class Book extends Component {
     }
   }
   render () {
-    const booksContent = this.props.bookName || this.state
+    const {booksContent, ...props } = this.props
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + booksContent.url +')' }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url(' + booksContent.previewLink +')' }}></div>
           <div className="book-shelf-changer">
-            <SelectButton selectContent={this.props.selectContent}/>
+            <SelectButton selectContent={this.props.selectContent} {...props}/>
           </div>
         </div>
         <div className="book-title">{booksContent.title}</div>

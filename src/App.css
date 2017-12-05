@@ -172,3 +172,9 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+#dragImg{
+  width: 10px;
+  height: 10px;
+  background: red;
+}
+#dragTarget {width:488px;height:70px;padding:10px;border:1px solid #aaaaaa;}
