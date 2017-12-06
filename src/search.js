@@ -8,20 +8,17 @@ class Search extends Component {
   getBook () {
     if (this.state.value) {
       BooksAPI.search(this.state.value, 10).then(res => {
-        console.log(res, 'book')
         let arr = []
         res.forEach((item, index) => {
           arr.push(
             <li key={index}>
-              <Book selectContent={this.props.selectContent} booksContent={item} {...this.props}/>
+              <Book booksContent={item} {...this.props}/>
             </li>
           )
         })
         this.setState({arr});
       })
     }
-
-    console.log(this.state.value)
   }
   state = {
     arr: [],
