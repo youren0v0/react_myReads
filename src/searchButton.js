@@ -2,7 +2,6 @@
  * Created by zhuyue on 17/7/24.
  */
 import React, { Component } from 'react';
-import Book from './book';
 class SearchButton extends Component {
   render () {
     return (

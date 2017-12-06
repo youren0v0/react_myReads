@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 import Home from './home';
 import Search from './search';
 import * as BooksAPI from './BooksAPI'
-import BookList from './booklist';
-import SearchButton from './searchButton';
 import './App.css';
 console.log(connect, 'connect')
 class App extends Component {
-  changeShow (msg) {
+  changeShow = (msg) => {
     this.setState({ showSearchPage: msg })
   }
-  componentWillMount () {
+  getAllBook = () => {
     BooksAPI.getAll().then(res => {
       console.log(res, 'getAll')
       let bookList = {}
@@ -25,6 +23,10 @@ class App extends Component {
       })
       this.setState({ bookList })
     })
+  }
+  componentWillMount () {
+    console.log(this.render(), 'render~~~~~~~~~~~~~~~~~~~')
+    this.getAllBook()
     console.log('componentWillMount')
   }
   state = {
@@ -47,14 +49,14 @@ class App extends Component {
     ]
   }
   render() {
-    console.log(this.state.bookList, 'render')
+    console.log(this.state.bookList, 'bookListbookListbookListbookListbookListbookListbookListbookList')
 
     return (
       <div className="App">
         {this.state.showSearchPage ? (
-          <Search changeShow={(msg) => this.changeShow(msg)} selectContent={this.state.select}/>
+          <Search changeShow={(msg) => this.changeShow(msg)} selectContent={this.state.select} getAllBook={() => this.getAllBook()}/>
         ) : (
-          <Home changeShow={(msg) => this.changeShow(msg)} selectContent={this.state.select} bookListContent={this.state.content} bookList={this.state.bookList}/>
+          <Home changeShow={(msg) => this.changeShow(msg)} selectContent={this.state.select} bookListContent={this.state.content} bookList={this.state.bookList} getAllBook={() => this.getAllBook()}/>
         )}
       </div>
     );

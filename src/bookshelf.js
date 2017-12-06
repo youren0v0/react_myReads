@@ -43,8 +43,6 @@ class Bookshelf extends Component {
           <ol className="books-grid">
             {items2}
           </ol>
-          <div id="dragTarget" onDrop={(ev)=> {this.drop(ev)}} onDragOver={(event)=> {this.allowDrop(event)}}></div>
-          <div id="dragImg" draggable="true" onDragStart={(ev)=>{this.drag(ev)}} ></div>
         </div>
       </div>
     )
@@ -52,3 +50,6 @@ class Bookshelf extends Component {
 }
 
 export default Bookshelf;
+
+// <div id="dragTarget" onDrop={(ev)=> {this.drop(ev)}} onDragOver={(event)=> {this.allowDrop(event)}}></div>
+// <div id="dragImg" draggable="true" onDragStart={(ev)=>{this.drag(ev)}} ></div>

@@ -6,16 +6,21 @@ import Book from './book';
 import * as BooksAPI from './BooksAPI'
 class Search extends Component {
   getBook () {
-    BooksAPI.get('nggnmAEACAAJ').then(res => {
-      console.log(res, 'book')
-      let arr = []
-      arr.push(
-        <li key={1}>
-          <Book selectContent={this.props.selectContent} booksContent={res}/>
-        </li>
-      )
-      this.setState({arr});
-    })
+    if (this.state.value) {
+      BooksAPI.search(this.state.value, 10).then(res => {
+        console.log(res, 'book')
+        let arr = []
+        res.forEach((item, index) => {
+          arr.push(
+            <li key={index}>
+              <Book selectContent={this.props.selectContent} booksContent={item} {...this.props}/>
+            </li>
+          )
+        })
+        this.setState({arr});
+      })
+    }
+
     console.log(this.state.value)
   }
   state = {
@@ -26,7 +31,6 @@ class Search extends Component {
     this.setState({value: e.target.value});
   }
   render () {
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
