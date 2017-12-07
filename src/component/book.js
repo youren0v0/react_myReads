@@ -2,14 +2,17 @@
  * Created by zhuyue on 17/7/24.
  */
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from '../plugins/BooksAPI'
 class SelectButton extends Component {
   changeSelect = (e) => {
-    this.setState({selectValue: e.target.value});
-    if (e.target.value) {
-      BooksAPI.update(this.props.booksContent.id, e.target.value).then(res => {
+    console.log(this.props, 'bookProps')
+    let newShelf = e.target.value
+    this.setState({selectValue: newShelf});
+    if (newShelf) {
+      BooksAPI.update(this.props.booksContent.id, newShelf).then(res => {
+        console.log(res, '!!!!!!!!!!!!!!!!!!!!!!')
       }).then(() => {
-        this.props.getAllBook()
+        this.props.changeState(this.props.booksContent.id, this.props.booksContent.shelf, newShelf)
       })
     }
   }
