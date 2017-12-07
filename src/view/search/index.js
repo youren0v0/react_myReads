@@ -2,8 +2,8 @@
  * Created by zhuyue on 17/7/24.
  */
 import React, { Component } from 'react';
-import Book from './book';
-import * as BooksAPI from './BooksAPI'
+import {Book} from './component'
+import * as BooksAPI from './../../plugins/BooksAPI'
 class Search extends Component {
   getBook () {
     if (this.state.value) {
